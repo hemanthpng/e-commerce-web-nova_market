@@ -1,0 +1,24 @@
+{
+  "name": "novamart-ecommerce",
+  "version": "1.0.0",
+  "description": "Full-stack e-commerce platform with manual admin email verification, payment gateway simulation, and order tracking.",
+  "type": "module",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "node api/index.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "vercel",
+    "full-stack",
+    "admin-panel",
+    "email-verification"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "nodemailer": "^10.6.1"
+  }
+}

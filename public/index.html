@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Shopping site in India: Shop Online for Mobiles, Electronics, Audio, Wearables & More - NovaMart.in</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            amazon: {
+              nav: '#17352d',
+              subnav: '#24483d',
+              hover: '#315d50',
+              yellow: '#f05d5e',
+              orange: '#e9a23b',
+              gold: '#f2b880',
+              deal: '#cc0c39',
+              prime: '#00a8e1',
+              green: '#007600',
+              dark: '#1d2a25'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f7f3ec] text-[#1d2a25] min-h-screen flex flex-col font-sans">
+
+  <!-- Top Global Announcement Bar (Amazon Dark Bar) -->
+  <div class="bg-[#17352d] text-slate-300 text-xs py-1.5 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center px-2 py-0.5 rounded bg-[#f2b880] text-slate-900 font-extrabold text-[11px] tracking-wide">
+          ⚡ TOP OFFERS
+        </span>
+        <span class="text-slate-300 font-medium hidden sm:inline">
+          Save up to 50% on top electronics, audio & wearables &bull; Free Express Delivery on ₹499+
+        </span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <div class="flex items-center gap-1 text-slate-300">
+          <svg class="w-3.5 h-3.5 text-[#f05d5e]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+          <span>Deliver to <strong class="text-white font-bold">India 560038</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Amazon Header Navigation -->
+  <header class="amazon-header sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3 md:gap-6">
+      
+      <!-- Brand Logo (Amazon Style with curved orange smile accent) -->
+      <a href="#" onclick="window.switchTab('store'); return false;" class="flex items-center gap-1.5 flex-shrink-0 group">
+        <div class="flex flex-col">
+          <span class="text-2xl font-black tracking-tight text-white flex items-center">
+            nova<span class="text-[#f05d5e]">mart</span><span class="text-xs text-[#f2b880] font-normal ml-0.5">.in</span>
+          </span>
+          <div class="h-1 w-full bg-gradient-to-r from-transparent via-[#f05d5e] to-transparent rounded-full -mt-0.5 group-hover:scale-105 transition"></div>
+        </div>
+      </a>
+
+      <!-- Location Widget (Desktop) -->
+      <div class="hidden lg:flex items-center gap-1.5 text-xs text-slate-300 hover:outline hover:outline-1 hover:outline-white p-1.5 rounded cursor-pointer">
+        <svg class="w-4 h-4 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <div class="leading-tight">
+          <div class="text-[10px] text-slate-400">Delivering to Bengaluru 560038</div>
+          <div class="font-bold text-white">Update location</div>
+        </div>
+      </div>
+
+      <!-- Amazon Signature Search Bar -->
+      <div class="flex-1 max-w-2xl hidden md:block">
+        <div class="amazon-search-container bg-white">
+          <select id="search-category-filter" onchange="window.filterCategory(this.value)" class="bg-slate-100 text-xs px-3 py-2.5 text-slate-700 font-semibold border-r border-slate-300 focus:outline-none cursor-pointer hover:bg-slate-200">
+            <option value="all">All</option>
+            <option value="electronics">Electronics</option>
+            <option value="wearables">Wearables</option>
+            <option value="audio">Audio & Sound</option>
+            <option value="fashion">Fashion</option>
+            <option value="home">Home & Kitchen</option>
+            <option value="beauty">Beauty & Wellness</option>
+            <option value="sports">Sports & Fitness</option>
+          </select>
+          <input 
+            type="text" 
+            id="global-search" 
+            placeholder="Search NovaMart.in (e.g. Headphones, Shoes, Smartwatch)..." 
+            class="flex-1 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
+            oninput="window.handleSearch(this.value)"
+            onkeydown="if(event.key === 'Enter') { event.preventDefault(); window.handleSearch(this.value, true); }"
+          >
+          <button type="button" onclick="window.handleSearch(document.getElementById('global-search').value, true)" class="amazon-search-btn px-5 py-2.5 flex items-center justify-center font-bold" title="Search">
+            <svg class="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Items & Navigation -->
+      <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+        
+        <!-- Storefront / Admin Panel switcher (Shown only when logged in as Admin) -->
+        <button id="nav-store-btn" onclick="window.switchTab('store')" class="hidden text-xs font-bold text-white hover:text-[#f2b880] px-2 py-1.5 rounded hover:outline hover:outline-1 hover:outline-white">
+          Storefront
+        </button>
+        <button id="nav-admin-btn" onclick="window.switchTab('admin')" class="hidden text-xs font-bold bg-[#f2b880] text-slate-900 px-2.5 py-1.5 rounded shadow-sm hover:bg-[#f3a847] flex items-center gap-1">
+          <span>Admin Portal</span>
+          <span id="pending-badge" class="hidden px-1.5 py-0.2 rounded-full text-[10px] bg-red-600 text-white font-extrabold">0</span>
+        </button>
+        <button id="nav-admin-login-btn" onclick="window.openAuthModal('admin', 'admin@store.com')" class="text-xs font-bold bg-[#f2b880]/95 hover:bg-[#f2b880] text-slate-900 px-2.5 py-1.5 rounded shadow-sm flex items-center gap-1 transition" title="Administrator Sign In">
+          <span>🛡️</span>
+          <span class="hidden sm:inline">Admin Login</span>
+        </button>
+
+        <!-- Simulated Mailbox Inspector (Admin Only) -->
+        <button id="admin-mailbox-btn" onclick="window.openMailbox()" class="hidden p-1.5 text-slate-200 hover:text-white hover:outline hover:outline-1 hover:outline-white rounded relative" title="Transactional Mailbox (Receipts & Verifications)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          <span id="mail-count-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#e9a23b] text-white text-[10px] flex items-center justify-center font-bold">0</span>
+        </button>
+
+        <!-- User Authentication & Account Profile -->
+        <div id="auth-actions" class="flex items-center gap-1.5">
+          <!-- Injected via JavaScript -->
+        </div>
+
+        <!-- Cart Button (Amazon Cart Look) -->
+        <button onclick="window.toggleCart()" class="flex items-center gap-1 text-white hover:outline hover:outline-1 hover:outline-white p-1.5 rounded relative" title="View Shopping Cart">
+          <div class="relative">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            <span id="cart-count-badge" class="absolute -top-1 left-3.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[#e9a23b] text-slate-900 text-[11px] font-black flex items-center justify-center">0</span>
+          </div>
+          <span class="text-xs font-bold text-white hidden sm:inline self-end mb-1">Cart</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Search -->
+    <div class="px-3 pb-2.5 md:hidden">
+      <div class="amazon-search-container bg-white">
+        <input 
+          type="text" 
+          id="mobile-search"
+          placeholder="Search NovaMart.in (e.g. Headphones, Shoes)..." 
+          class="flex-1 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
+          oninput="window.handleSearch(this.value)"
+          onkeydown="if(event.key === 'Enter') { event.preventDefault(); window.handleSearch(this.value, true); }"
+        >
+        <button type="button" onclick="window.handleSearch(document.getElementById('mobile-search').value, true)" class="amazon-search-btn px-4 py-2" title="Search">
+          <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Secondary Amazon Sub-Navigation Bar -->
+    <div class="amazon-subnav px-4 py-1.5 text-xs text-white flex items-center gap-2 overflow-x-auto scrollbar-none border-t border-slate-700/60">
+      <button onclick="window.filterCategory('all')" class="font-bold flex items-center gap-1 text-white hover:border-white px-1 py-0.5 rounded">
+        <span>☰ All</span>
+      </button>
+      <button onclick="window.filterCategory('electronics')" class="text-white hover:text-[#f2b880] font-medium px-1">Mobiles & Gadgets</button>
+      <button onclick="window.filterCategory('wearables')" class="text-white hover:text-[#f2b880] font-medium px-1">Wearables</button>
+      <button onclick="window.filterCategory('audio')" class="text-white hover:text-[#f2b880] font-medium px-1">Audio & Sound</button>
+      <button onclick="window.filterCategory('fashion')" class="text-white hover:text-[#f2b880] font-medium px-1">Fashion & Apparel</button>
+      <button onclick="window.filterCategory('home')" class="text-white hover:text-[#f2b880] font-medium px-1">Home & Kitchen</button>
+      <button onclick="window.filterCategory('sports')" class="text-white hover:text-[#f2b880] font-medium px-1">Sports & Fitness</button>
+      <button onclick="window.filterCategory('beauty')" class="text-white hover:text-[#f2b880] font-medium px-1">Beauty & Wellness</button>
+      <button onclick="window.filterCategory('all'); window.handleSort('rating');" class="text-white hover:text-[#f2b880] font-medium px-1">Today's Deals</button>
+      <button onclick="window.startCheckout()" class="text-emerald-400 font-bold flex items-center gap-1 px-1">
+        <span>🎟️ Coupons</span>
+      </button>
+      <button onclick="window.openTrackOrderModal()" class="text-sky-300 font-semibold flex items-center gap-1 px-1">
+        <span>📦 Track Order</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Notification Banner (For verification status alerts) -->
+  <div id="account-alert-banner" class="hidden bg-amber-500 text-slate-900 px-4 py-2.5 text-sm font-medium shadow-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+        <span id="account-alert-text">Registration successful! Waiting for admin approval.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+
+    <!-- ========================================== -->
+    <!-- 1. CUSTOMER STOREFRONT VIEW               -->
+    <!-- ========================================== -->
+    <section id="view-store" class="space-y-6">
+      
+      <!-- Amazon Multi-Card Promotional Hero Grid (Direct Match to Amazon.in) -->
+      <div id="promotional-hero-banner" class="relative">
+        <!-- 5 Colorful Amazon Feature Cards (Horizontal swipe carousel on mobile, 5-column grid on desktop) -->
+        <div class="flex overflow-x-auto sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 pb-2 sm:pb-0 scrollbar-none snap-x snap-mandatory">
+          
+          <!-- Card 1: NovaMart Bazaar (Coral/Red Header + 6-item Product Matrix) -->
+          <div onclick="window.filterCategory('all')" class="w-[84vw] max-w-[310px] sm:w-auto shrink-0 snap-center group rounded-2xl overflow-hidden shadow-xs hover:shadow-md border border-slate-200 bg-white transition duration-200 flex flex-col justify-between cursor-pointer">
+            <div class="bg-gradient-to-r from-[#d95d62] to-[#f05d5e] text-white p-3.5">
+              <div class="text-xs font-semibold text-rose-100">Get up to</div>
+              <div class="text-2xl font-black leading-tight">₹100 cashback*</div>
+              <div class="text-[11px] font-medium text-rose-100 mt-0.5">Lowest prices on NovaMart</div>
+              <div class="mt-2 inline-flex items-center gap-1.5 bg-white/20 px-2 py-0.5 rounded text-[10px] font-extrabold backdrop-blur-xs">
+                <span class="italic text-[#f2b880]">bazaar</span>
+                <span class="text-white">Free Delivery</span>
+              </div>
+            </div>
+            <div class="p-2.5 bg-white flex-1 flex flex-col justify-between">
+              <div class="grid grid-cols-3 gap-1.5">
+                <div onclick="event.stopPropagation(); window.filterCategory('cat_wearables')" class="flex flex-col items-center p-1 rounded-lg bg-slate-50 border border-slate-100 hover:bg-slate-100 cursor-pointer">
+                  <img src="https://picsum.photos/seed/novamart-static-1/800/800" alt="Watch" class="w-11 h-11 object-contain">
+                  <span class="text-[9px] font-bold text-slate-700 mt-1 truncate max-w-full">Watches</span>
+                </div>
+                <div onclick="event.stopPropagation(); window.filterCategory('cat_fashion')" class="flex flex-col items-center p-1 rounded-lg bg-slate-50 border border-slate-100 hover:bg-slate-100 cursor-pointer">
+                  <img src="https://picsum.photos/seed/novamart-static-2/800/800" alt="Jacket" class="w-11 h-11 object-contain">
+                  <span class="text-[9px] font-bold text-slate-700 mt-1 truncate max-w-full">Fashion</span>
+                </div>
+                <div onclick="event.stopPropagation(); window.filterCategory('cat_home')" class="flex flex-col items-center p-1 rounded-lg bg-slate-50 border border-slate-100 hover:bg-slate-100 cursor-pointer">
+                  <img src="https://picsum.photos/seed/novamart-static-3/800/800" alt="Ceramic Mug" class="w-11 h-11 object-contain">
+                  <span class="text-[9px] font-bold text-slate-700 mt-1 truncate max-w-full">Home</span>
+                </div>
+                <div onclick="event.stopPropagation(); window.filterCategory('cat_fashion')" class="flex flex-col items-center p-1 rounded-lg bg-slate-50 border border-slate-100 hover:bg-slate-100 cursor-pointer">
+                  <img src="https://picsum.photos/seed/novamart-static-4/800/800" alt="Backpack" class="w-11 h-11 object-contain">
+                  <span class="text-[9px] font-bold text-slate-700 mt-1 truncate max-w-full">Bags</span>
+                </div>
+                <div onclick="event.stopPropagation(); window.filterCategory('cat_home')" class="flex flex-col items-center p-1 rounded-lg bg-slate-50 border border-slate-100 hover:bg-slate-100 cursor-pointer">
+                  <img src="https://picsum.photos/seed/novamart-static-5/800/800" alt="Lamp" class="w-11 h-11 object-contain">
+                  <span class="text-[9px] font-bold text-slate-700 mt-1 truncate max-w-full">Decor</span>
+                </div>
+                <div onclick="event.stopPropagation(); window.filterCategory('cat_audio')" class="flex flex-col items-center p-1 rounded-lg bg-slate-50 border border-slate-100 hover:bg-slate-100 cursor-pointer">
+                  <img src="https://picsum.photos/seed/novamart-static-6/800/800" alt="Earbuds" class="w-11 h-11 object-contain">
+                  <span class="text-[9px] font-bold text-slate-700 mt-1 truncate max-w-full">Audio</span>
+                </div>
+              </div>
+              <div class="pt-2 text-[11px] font-bold text-[#2f6f61] group-hover:text-[#c7511f]">
+                Explore all bazaar deals &rarr;
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Apparel Under ₹299 (Clean Studio Off-White) -->
+          <div onclick="window.filterBudget(299, 'tshirt', 'All Under ₹299: T-shirt & polos')" class="w-[84vw] max-w-[310px] sm:w-auto shrink-0 snap-center group rounded-2xl overflow-hidden shadow-xs hover:shadow-md border border-slate-200 bg-[#f8f9fa] p-3.5 transition duration-200 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="text-xl font-black text-slate-900 leading-tight">All Under ₹299</div>
+              <div class="text-xs text-slate-600 font-semibold mt-0.5">T-shirt & polos</div>
+              <div class="mt-1.5 inline-flex items-center gap-1 text-[10px] font-bold text-slate-800">
+                <span class="italic font-black text-[#d95d62]">bazaar</span>
+                <span class="text-slate-600 font-medium">Free Delivery</span>
+              </div>
+            </div>
+            <div class="my-2.5 rounded-xl overflow-hidden bg-white border border-slate-200/80 aspect-[4/3] flex items-center justify-center relative shadow-inner">
+              <img src="https://picsum.photos/seed/novamart-static-7/800/800" alt="Apparel" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute bottom-1.5 right-1.5 bg-slate-900/80 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">₹199+</span>
+            </div>
+            <div class="text-[11px] font-bold text-[#2f6f61] group-hover:text-[#c7511f]">
+              See more styles &rarr;
+            </div>
+          </div>
+
+          <!-- Card 3: Gaming & Tech Finds (Warm Peach / Terracotta) -->
+          <div onclick="window.filterBudget(499, 'gaming', 'Starting ₹299: Fun finds for gaming & tech')" class="w-[84vw] max-w-[310px] sm:w-auto shrink-0 snap-center group rounded-2xl overflow-hidden shadow-xs hover:shadow-md border border-orange-200 bg-gradient-to-b from-[#fbeee6] via-[#fce4d6] to-[#f8d7c4] p-3.5 transition duration-200 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="text-xl font-black text-[#9a3412] leading-tight">Starting ₹299</div>
+              <div class="text-xs text-slate-700 font-semibold mt-0.5">Fun finds for gaming & tech</div>
+            </div>
+            <div class="my-2.5 rounded-xl overflow-hidden bg-white/90 border border-orange-200/80 aspect-[4/3] flex items-center justify-center relative shadow-inner">
+              <img src="https://picsum.photos/seed/novamart-static-8/800/800" alt="Gaming" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute top-1.5 left-1.5 bg-[#9a3412] text-white text-[9px] font-black px-1.5 py-0.5 rounded uppercase">Bestseller</span>
+            </div>
+            <div class="bg-white/85 p-1.5 rounded-lg text-[10px] text-slate-800 font-bold border border-orange-300/60 mb-2 flex items-center gap-1">
+              <span class="text-emerald-700">💳 5% Cashback</span> with NovaPay
+            </div>
+            <div class="text-[11px] font-bold text-[#9a3412] group-hover:underline">
+              Shop gaming deals &rarr;
+            </div>
+          </div>
+
+          <!-- Card 4: FunZone Rewards & Coupons (Sky Blue) -->
+          <div onclick="window.startCheckout()" class="w-[84vw] max-w-[310px] sm:w-auto shrink-0 snap-center group rounded-2xl overflow-hidden shadow-xs hover:shadow-md border border-sky-300 bg-gradient-to-b from-[#e0f2fe] via-[#bae6fd] to-[#7dd3fc] p-3.5 transition duration-200 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="text-xl font-black text-[#0369a1] leading-tight">Win up to ₹300 back</div>
+              <div class="text-[10px] font-black tracking-wider text-sky-900 mt-0.5 uppercase">🎯 FUNZONE REWARDS</div>
+            </div>
+            <div class="my-2.5 rounded-xl overflow-hidden bg-white/90 border border-sky-200/80 aspect-[4/3] flex items-center justify-center relative shadow-inner">
+              <img src="https://picsum.photos/seed/novamart-static-9/800/800" alt="FunZone" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute bottom-1.5 left-1.5 bg-[#0284c7] text-white text-[9px] font-bold px-1.5 py-0.5 rounded">Spin & Win</span>
+            </div>
+            <div class="bg-[#0369a1] text-white p-1.5 rounded-lg text-[10px] text-center font-bold mb-1 hover:bg-[#0284c7]">
+              Apply Coupon: FLAT500
+            </div>
+            <div class="text-[10px] text-sky-950 font-medium flex justify-between items-center">
+              <span>*T&C apply</span>
+              <span class="font-bold text-[#0369a1]">Claim &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Shoes & Footwear (Warm Sand / Natural Tan) -->
+          <div onclick="window.filterBudget(399, 'shoes', 'Under ₹399: Shoes & sneakers')" class="w-[84vw] max-w-[310px] sm:w-auto shrink-0 snap-center group rounded-2xl overflow-hidden shadow-xs hover:shadow-md border border-amber-200 bg-gradient-to-b from-[#fbf7f2] via-[#f5ede1] to-[#ebe0cf] p-3.5 transition duration-200 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="text-xl font-black text-[#5c3d2e] leading-tight">Under ₹399</div>
+              <div class="text-xs text-slate-700 font-semibold mt-0.5">Shoes & sneakers</div>
+              <div class="mt-1.5 inline-flex items-center gap-1 text-[10px] font-bold text-slate-800">
+                <span class="italic font-black text-[#d95d62]">bazaar</span>
+                <span class="text-slate-600 font-medium">Free Delivery</span>
+              </div>
+            </div>
+            <div class="my-2.5 rounded-xl overflow-hidden bg-white/90 border border-amber-200/80 aspect-[4/3] flex items-center justify-center relative shadow-inner">
+              <img src="https://picsum.photos/seed/novamart-static-10/800/800" alt="Sneakers" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute top-1.5 right-1.5 bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">Trending</span>
+            </div>
+            <div class="text-[11px] font-bold text-[#5c3d2e] group-hover:underline">
+              Browse footwear &rarr;
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Horizontal Quick Category Deals Navigation (Matching Amazon.in sub-strip) -->
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mt-4">
+          <div onclick="window.filterCategory('all'); window.handleSort('rating');" class="bg-white p-3 rounded-xl border border-slate-200 hover:border-[#f05d5e] shadow-2xs flex items-center justify-between cursor-pointer group transition">
+            <span class="text-xs font-bold text-slate-800 group-hover:text-[#2f6f61]">Customers' Most-Loved Products</span>
+            <span class="text-slate-400 group-hover:text-[#f05d5e] font-black text-sm">&rsaquo;</span>
+          </div>
+          <div onclick="window.filterCategory('electronics')" class="bg-white p-3 rounded-xl border border-slate-200 hover:border-[#f05d5e] shadow-2xs flex items-center justify-between cursor-pointer group transition">
+            <span class="text-xs font-bold text-slate-800 group-hover:text-[#2f6f61]">Lowest prices on NovaMart + Extra 15% cashback</span>
+            <span class="text-slate-400 group-hover:text-[#f05d5e] font-black text-sm">&rsaquo;</span>
+          </div>
+          <div onclick="window.filterCategory('audio')" class="bg-white p-3 rounded-xl border border-slate-200 hover:border-[#f05d5e] shadow-2xs flex items-center justify-between cursor-pointer group transition">
+            <span class="text-xs font-bold text-slate-800 group-hover:text-[#2f6f61]">Bestselling Audio & Soundbars</span>
+            <span class="text-slate-400 group-hover:text-[#f05d5e] font-black text-sm">&rsaquo;</span>
+          </div>
+          <div onclick="window.filterCategory('wearables')" class="bg-white p-3 rounded-xl border border-slate-200 hover:border-[#f05d5e] shadow-2xs flex items-center justify-between cursor-pointer group transition">
+            <span class="text-xs font-bold text-slate-800 group-hover:text-[#2f6f61]">Smartwatches & Wearable Devices</span>
+            <span class="text-slate-400 group-hover:text-[#f05d5e] font-black text-sm">&rsaquo;</span>
+          </div>
+        </div>
+
+        <!-- Active Promotional Coupon Toolbar -->
+        <div class="bg-gradient-to-r from-[#24483d] to-[#17352d] rounded-xl p-3 px-4 text-white flex flex-wrap items-center justify-between gap-3 border border-amber-400/30 mt-4 shadow-sm">
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400 font-extrabold text-xs flex items-center gap-1">
+              <span>🎟️</span> ACTIVE SAVINGS COUPONS:
+            </span>
+            <span class="text-slate-300 text-xs hidden md:inline">Click any coupon code to automatically apply to checkout</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <button onclick="window.applyCoupon('WELCOME10'); showToast('Coupon WELCOME10 selected for 10% OFF!', 'success');" class="px-2.5 py-1 rounded bg-[#1d3a32] border border-amber-400/60 text-[#f2b880] font-mono font-bold hover:bg-amber-400 hover:text-slate-900 transition">
+              WELCOME10 (10% OFF)
+            </button>
+            <button onclick="window.applyCoupon('FLAT500'); showToast('Coupon FLAT500 selected for ₹500 OFF!', 'success');" class="px-2.5 py-1 rounded bg-[#1d3a32] border border-amber-400/60 text-[#f2b880] font-mono font-bold hover:bg-amber-400 hover:text-slate-900 transition">
+              FLAT500 (₹500 OFF)
+            </button>
+            <button onclick="window.applyCoupon('FREESHIP'); showToast('Coupon FREESHIP selected for Free Delivery!', 'success');" class="px-2.5 py-1 rounded bg-[#1d3a32] border border-amber-400/60 text-[#f2b880] font-mono font-bold hover:bg-amber-400 hover:text-slate-900 transition">
+              FREESHIP (Free Delivery)
+            </button>
+            <button onclick="window.applyCoupon('MEGA50'); showToast('Coupon MEGA50 selected for 50% OFF!', 'success');" class="px-2.5 py-1 rounded bg-[#1d3a32] border border-amber-400/60 text-[#f2b880] font-mono font-bold hover:bg-amber-400 hover:text-slate-900 transition">
+              MEGA50 (50% OFF)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Catalog Section Anchor (For smooth scroll directly to results) -->
+      <div id="product-catalog-anchor" class="scroll-mt-28"></div>
+
+      <!-- Categories & Filter Toolbar (Browse Products Use Case) -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-300">
+        <!-- Category Pills -->
+        <div id="category-pills" class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
+          <!-- Injected via JavaScript -->
+        </div>
+
+        <!-- Sort Control -->
+        <div class="flex items-center gap-2 self-end md:self-auto">
+          <span class="text-xs text-slate-600 font-semibold">Sort by:</span>
+          <select id="sort-select" onchange="window.handleSort(this.value)" class="text-xs bg-white border border-slate-300 rounded-lg px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-1 focus:ring-[#f05d5e]">
+            <option value="featured">Featured Deals</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating">Highest Customer Rating</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Product Catalog Grid (Responsive 2-column on mobile, 4-column on desktop) -->
+      <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. ADMIN PORTAL VIEW                       -->
+    <!-- ========================================== -->
+    <section id="view-admin" class="hidden space-y-6">
+      
+      <!-- Admin Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-2xl font-bold text-slate-900">Administrator Command Center</h2>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-700 border border-purple-200">Admin Role</span>
+          </div>
+          <p class="text-sm text-slate-500 mt-1">Manage manual customer email approvals, products catalog, categories, incoming orders, payments, and generated reports.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="window.openMailbox()" class="btn-secondary text-xs flex items-center gap-1.5 font-bold">
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>Dispatched Mailbox Logs</span>
+          </button>
+          <button onclick="window.openAddProductModal()" class="btn-primary text-xs">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Add New Product
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Tab Navigation (Direct UML Actor Functions) -->
+      <div class="flex border-b border-slate-200 overflow-x-auto gap-2">
+        <button id="tab-btn-customers" onclick="window.setAdminTab('customers')" class="px-4 py-3 text-sm font-semibold border-b-2 border-blue-600 text-blue-600 flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          Manage Customers & Email Approvals
+          <span id="admin-pending-count" class="px-2 py-0.5 text-xs rounded-full bg-amber-500 text-white font-bold">0</span>
+        </button>
+        <button id="tab-btn-orders" onclick="window.setAdminTab('orders')" class="px-4 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+          Manage Orders
+        </button>
+        <button id="tab-btn-products" onclick="window.setAdminTab('products')" class="px-4 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+          Manage Products
+        </button>
+        <button id="tab-btn-categories" onclick="window.setAdminTab('categories')" class="px-4 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+          Manage Categories
+        </button>
+        <button id="tab-btn-payments" onclick="window.setAdminTab('payments')" class="px-4 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+          Manage Payments
+        </button>
+        <button id="tab-btn-reports" onclick="window.setAdminTab('reports')" class="px-4 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 border-b-2 border-transparent flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          Generate Reports
+        </button>
+      </div>
+
+      <!-- Admin Sub-View: Manage Customers & Email Approvals (User's special requirement!) -->
+      <div id="admin-subview-customers" class="space-y-4">
+        <!-- Explanatory Banner + Registration Settings & Add User -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="flex items-start gap-3">
+            <div class="p-2 bg-blue-100 rounded-lg text-blue-700 shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-blue-900">User Registration Control &amp; Verification Workflow</h4>
+              <p class="text-xs text-blue-700 mt-0.5">
+                Control whether new users can register publicly, toggle manual approval vs instant activation, approve pending signups, or register new users directly.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <label class="inline-flex items-center gap-2 bg-white border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-800 cursor-pointer shadow-2xs">
+              <input type="checkbox" id="setting-allow-registration" checked onchange="window.adminToggleSetting('allowPublicRegistration', this.checked)" class="rounded text-blue-600 focus:ring-blue-500">
+              <span>Allow New User Registration</span>
+            </label>
+            <label class="inline-flex items-center gap-2 bg-white border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-800 cursor-pointer shadow-2xs">
+              <input type="checkbox" id="setting-require-approval" checked onchange="window.adminToggleSetting('requireAdminApproval', this.checked)" class="rounded text-blue-600 focus:ring-blue-500">
+              <span>Require Admin Approval</span>
+            </label>
+            <button onclick="window.openAddUserModal()" class="btn-primary text-xs py-2 px-3.5 font-bold">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+              Register New User
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter tabs for customers -->
+        <div class="flex items-center gap-2">
+          <button onclick="window.filterCustomers('all')" id="btn-cust-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white">All Users</button>
+          <button onclick="window.filterCustomers('pending_approval')" id="btn-cust-pending" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-1.5">
+            Pending Approval
+            <span id="cust-pending-chip" class="px-1.5 py-0.2 rounded-full bg-amber-500 text-white text-[10px]">0</span>
+          </button>
+          <button onclick="window.filterCustomers('approved')" id="btn-cust-approved" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Approved</button>
+          <button onclick="window.filterCustomers('rejected')" id="btn-cust-rejected" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Rejected</button>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+              <thead class="bg-slate-50 text-xs font-bold text-slate-500 uppercase border-b border-slate-200">
+                <tr>
+                  <th class="px-6 py-3.5">User Name, Email &amp; Role</th>
+                  <th class="px-6 py-3.5">Registration Date</th>
+                  <th class="px-6 py-3.5">Verification Status</th>
+                  <th class="px-6 py-3.5">Orders / Spent</th>
+                  <th class="px-6 py-3.5 text-right">Admin Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customers-table-body" class="divide-y divide-slate-200">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Sub-View: Manage Orders -->
+      <div id="admin-subview-orders" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="font-bold text-slate-900">Customer Orders & Shipment Tracking</h3>
+            <span class="text-xs text-slate-500">Live order status updates trigger customer notification emails</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+              <thead class="bg-slate-50 text-xs font-bold text-slate-500 uppercase border-b border-slate-200">
+                <tr>
+                  <th class="px-6 py-3.5">Order ID</th>
+                  <th class="px-6 py-3.5">Customer</th>
+                  <th class="px-6 py-3.5">Items</th>
+                  <th class="px-6 py-3.5">Total Amount</th>
+                  <th class="px-6 py-3.5">Status</th>
+                  <th class="px-6 py-3.5 text-right">Update Delivery</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-table-body" class="divide-y divide-slate-200">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Sub-View: Manage Products -->
+      <div id="admin-subview-products" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="font-bold text-slate-900">Inventory & Catalog Management</h3>
+            <button onclick="window.openAddProductModal()" class="btn-primary text-xs">Add Product</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+              <thead class="bg-slate-50 text-xs font-bold text-slate-500 uppercase border-b border-slate-200">
+                <tr>
+                  <th class="px-6 py-3.5">Product</th>
+                  <th class="px-6 py-3.5">Category</th>
+                  <th class="px-6 py-3.5">Price</th>
+                  <th class="px-6 py-3.5">Stock</th>
+                  <th class="px-6 py-3.5">Rating</th>
+                  <th class="px-6 py-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table-body" class="divide-y divide-slate-200">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Sub-View: Manage Categories -->
+      <div id="admin-subview-categories" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-900">Product Categories</h3>
+            <button onclick="window.openAddCategoryModal()" class="btn-primary text-xs">Add New Category</button>
+          </div>
+          <div id="admin-categories-list" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Sub-View: Manage Payments -->
+      <div id="admin-subview-payments" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="p-4 border-b border-slate-200">
+            <h3 class="font-bold text-slate-900">Payment Gateway Transactions</h3>
+            <p class="text-xs text-slate-500">Includes payment processor references, card authorization, and refund status.</p>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+              <thead class="bg-slate-50 text-xs font-bold text-slate-500 uppercase border-b border-slate-200">
+                <tr>
+                  <th class="px-6 py-3.5">Payment ID</th>
+                  <th class="px-6 py-3.5">Order ID</th>
+                  <th class="px-6 py-3.5">Customer</th>
+                  <th class="px-6 py-3.5">Amount</th>
+                  <th class="px-6 py-3.5">Method & Gateway Ref</th>
+                  <th class="px-6 py-3.5">Status</th>
+                  <th class="px-6 py-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-payments-table-body" class="divide-y divide-slate-200">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Sub-View: Generate Reports -->
+      <div id="admin-subview-reports" class="hidden space-y-6">
+        <!-- KPI Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-medium text-slate-500 uppercase">Total Revenue</p>
+            <p id="kpi-revenue" class="text-2xl font-black text-slate-900 mt-1">₹0.00</p>
+            <p class="text-[11px] text-emerald-600 mt-2 font-medium">Verified Gateway Receipts</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-medium text-slate-500 uppercase">Total Orders</p>
+            <p id="kpi-orders" class="text-2xl font-black text-slate-900 mt-1">0</p>
+            <p class="text-[11px] text-blue-600 mt-2 font-medium">Across all statuses</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-medium text-slate-500 uppercase">Customers (Approved / Pending)</p>
+            <p id="kpi-customers" class="text-2xl font-black text-slate-900 mt-1">0 / 0</p>
+            <p class="text-[11px] text-amber-600 mt-2 font-medium">Manual email verification enabled</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-medium text-slate-500 uppercase">Avg Order Value</p>
+            <p id="kpi-aov" class="text-2xl font-black text-slate-900 mt-1">₹0.00</p>
+            <p class="text-[11px] text-purple-600 mt-2 font-medium">Per completed transaction</p>
+          </div>
+        </div>
+
+        <!-- Breakdown Charts & Top Sellers -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Sales by Category -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-4">Sales by Category</h4>
+            <div id="category-report-bars" class="space-y-3">
+              <!-- Injected via JavaScript -->
+            </div>
+          </div>
+
+          <!-- Top Selling Products -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h4 class="font-bold text-slate-900 mb-4">Top Performing Products</h4>
+            <div id="top-products-list" class="space-y-3">
+              <!-- Injected via JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button onclick="window.printReport()" class="btn-secondary text-xs">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            Print / Export Report Summary
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODALS & SLIDE-OVER PANELS                 -->
+  <!-- ========================================== -->
+
+  <!-- 1. Cart Slide-Over Drawer -->
+  <div id="cart-drawer-overlay" class="drawer-overlay" onclick="window.toggleCart()"></div>
+  <aside id="cart-drawer" class="drawer-panel">
+    <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <h3 class="font-bold text-slate-900">Your Shopping Cart</h3>
+        <span id="drawer-cart-count" class="px-2 py-0.5 rounded-full text-xs bg-blue-100 text-blue-700 font-bold">0</span>
+      </div>
+      <button onclick="window.toggleCart()" class="p-1 rounded-lg text-slate-400 hover:text-slate-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <!-- Items List -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Summary & Checkout Footer -->
+    <div class="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
+      <div class="space-y-1.5 text-xs text-slate-600">
+        <div class="flex justify-between">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal" class="font-semibold text-slate-800">₹0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Estimated GST (18%):</span>
+          <span id="cart-tax" class="font-semibold text-slate-800">₹0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Shipping:</span>
+          <span id="cart-shipping" class="font-semibold text-slate-800">₹0.00</span>
+        </div>
+        <div class="flex justify-between text-sm font-bold text-slate-900 pt-2 border-t border-slate-200">
+          <span>Total:</span>
+          <span id="cart-total" class="text-blue-600 text-base">₹0.00</span>
+        </div>
+      </div>
+
+      <button id="checkout-btn" onclick="window.startCheckout()" class="w-full btn-primary text-sm py-3 font-bold shadow-md">
+        Proceed to Secure Checkout &rarr;
+      </button>
+    </div>
+  </aside>
+
+  <!-- 2. Product Details & Reviews Modal (View Product Details + Add Review) -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal-card max-w-3xl">
+      <div id="product-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Multi-Step Checkout & Payment Gateway Modal (Place Order + Make Payment + Process Payment) -->
+  <div id="checkout-modal" class="modal-overlay">
+    <div class="modal-card max-w-xl p-6">
+      <div id="checkout-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Returns & Orders Modal (Orders History + Return/Replace Items + Live Tracking) -->
+  <div id="tracking-modal" class="modal-overlay">
+    <div class="modal-card max-w-3xl p-6">
+      <div id="tracking-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. User Authentication Modal (Register / Login) -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal-card max-w-md p-6">
+      <div id="auth-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. In-App Mailbox Viewer (Preview Dispatched Approval & Order Emails) -->
+  <div id="mailbox-modal" class="modal-overlay">
+    <div class="modal-card max-w-3xl p-6">
+      <div id="mailbox-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Admin Add/Edit Product Modal -->
+  <div id="admin-product-modal" class="modal-overlay">
+    <div class="modal-card max-w-lg p-6">
+      <div id="admin-product-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Admin Register New User Modal -->
+  <div id="admin-user-modal" class="modal-overlay">
+    <div class="modal-card max-w-md p-6">
+      <div id="admin-user-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Message Container -->
+  <div id="toast-container"></div>
+
+  <!-- Amazon Multi-Tier Footer -->
+  <footer class="mt-16 text-xs text-slate-300">
+    <!-- Back to Top Bar -->
+    <div onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-[#315d50] hover:bg-[#485769] text-white py-3.5 text-center font-bold text-xs cursor-pointer transition select-none">
+      Back to top ↑
+    </div>
+
+    <!-- Main 4-Column Footer -->
+    <div class="bg-[#24483d] py-10 px-4 border-b border-slate-700">
+      <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm">Get to Know Us</h4>
+          <ul class="space-y-1.5 text-slate-300">
+            <li><a href="#" class="hover:underline">About NovaMart.in</a></li>
+            <li><a href="#" class="hover:underline">Careers</a></li>
+            <li><a href="#" class="hover:underline">Press Releases</a></li>
+            <li><a href="#" class="hover:underline">NovaMart Science</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm">Connect with Us</h4>
+          <ul class="space-y-1.5 text-slate-300">
+            <li><a href="#" class="hover:underline">Facebook</a></li>
+            <li><a href="#" class="hover:underline">Twitter / X</a></li>
+            <li><a href="#" class="hover:underline">Instagram</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm">Make Money with Us</h4>
+          <ul class="space-y-1.5 text-slate-300">
+            <li><a href="#" class="hover:underline">Sell on NovaMart</a></li>
+            <li><a href="#" class="hover:underline">Fulfillment by NovaMart</a></li>
+            <li><a href="#" class="hover:underline">Advertise Your Products</a></li>
+            <li><a href="#" class="hover:underline">NovaMart Pay on Merchants</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm">Let Us Help You</h4>
+          <ul class="space-y-1.5 text-slate-300">
+            <li><a href="#" onclick="window.openTrackOrderModal(); return false;" class="hover:underline">Your Orders & Tracking</a></li>
+            <li id="footer-admin-mailbox" class="hidden"><a href="#" onclick="window.openMailbox(); return false;" class="hover:underline">Dispatched Receipt Logs</a></li>
+            <li><a href="#" class="hover:underline">100% Purchase Protection</a></li>
+            <li><a href="#" class="hover:underline">Help & Customer Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Region Bar -->
+    <div class="bg-[#17352d] py-8 px-4 text-center text-slate-400 space-y-3">
+      <div class="flex items-center justify-center gap-6 text-xs">
+        <span class="font-bold text-white text-base">nova<span class="text-[#f05d5e]">mart</span>.in</span>
+        <span class="border border-slate-600 px-3 py-1 rounded text-slate-300">🌐 English</span>
+        <span class="border border-slate-600 px-3 py-1 rounded text-slate-300">🇮🇳 India</span>
+      </div>
+      <p class="text-[11px] text-slate-500">
+        &copy; 2026 NovaMart.in, Inc. or its affiliates. Full-Stack E-Commerce Architecture (Customer, Admin, Payment Gateway, Delivery Service).
+      </p>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/js/app.js"></script>
+</body>
+</html>
