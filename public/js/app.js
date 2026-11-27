@@ -1994,7 +1994,7 @@
           <div>
             <label class="font-semibold text-slate-700">Password</label>
             <div class="relative mt-1">
-              <input type="password" id="admin-u-password" required minlength="4" placeholder="Enter password" class="w-full p-2 pr-10 bg-slate-50 border border-slate-200 rounded-lg">
+              <input type="password" id="admin-u-password" required minlength="8" placeholder="At least 8 characters" class="w-full p-2 pr-10 bg-slate-50 border border-slate-200 rounded-lg">
               <button type="button" id="admin-u-password-toggle" onclick="window.togglePasswordVisibility('admin-u-password', 'admin-u-password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600" title="Show password">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -2814,7 +2814,7 @@
               <div>
                 <label class="font-semibold text-slate-700">Password</label>
                 <div class="relative mt-1">
-                  <input type="password" id="reg-password" required placeholder="••••••••" class="w-full p-2 pr-10 bg-slate-50 border border-slate-200 rounded-lg">
+                  <input type="password" id="reg-password" required minlength="8" placeholder="At least 8 characters" class="w-full p-2 pr-10 bg-slate-50 border border-slate-200 rounded-lg">
                   <button type="button" id="reg-password-toggle" onclick="window.togglePasswordVisibility('reg-password', 'reg-password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600 focus:outline-none" title="Show / Hide Password" aria-label="Show password">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 hover:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
