@@ -85,6 +85,20 @@ function sendJson(res, statusCode, data) {
   res.end(JSON.stringify(data));
 }
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_PASSWORD_LENGTH = 8;
+
+function validateRegistration({ name, email, password }) {
+  if (typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string' || !name.trim() || !email.trim() || !password) {
+    return 'Name, email, and password are required';
+  }
+  if (name.trim().length > 100) return 'Name must be 100 characters or fewer';
+  if (!EMAIL_PATTERN.test(email.trim()) || email.length > 254) return 'Please enter a valid email address';
+  if (password.length < MIN_PASSWORD_LENGTH) return `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
+  if (password.length > 128) return 'Password must be 128 characters or fewer';
+  return null;
+}
+
 function sendError(res, statusCode, message, details = {}) {
   sendJson(res, statusCode, { error: message, ...details });
 }
@@ -171,9 +185,8 @@ export default async function handler(req, res) {
         const body = await parseBody(req);
         const { name, email, password, phone, address } = body;
 
-        if (!name || !email || !password) {
-          return sendError(res, 400, 'Name, email, and password are required');
-        }
+        const registrationError = validateRegistration(body);
+        if (registrationError) return sendError(res, 400, registrationError);
 
         const existing = db.getUserByEmail(email);
         if (existing) {
@@ -381,9 +394,8 @@ export default async function handler(req, res) {
         const body = await parseBody(req);
         const { name, email, password, phone, address, role, status } = body;
 
-        if (!name || !email || !password) {
-          return sendError(res, 400, 'Name, email, and password are required');
-        }
+        const registrationError = validateRegistration(body);
+        if (registrationError) return sendError(res, 400, registrationError);
 
         const existing = db.getUserByEmail(email);
         if (existing) {

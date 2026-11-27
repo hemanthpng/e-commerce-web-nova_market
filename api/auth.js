@@ -38,7 +38,9 @@ export function verifyToken(token) {
     .update(`${header}.${payload}`)
     .digest('base64url');
     
-  if (signature !== expectedSig) return null;
+  const actual = Buffer.from(signature);
+  const expected = Buffer.from(expectedSig);
+  if (actual.length !== expected.length || !crypto.timingSafeEqual(actual, expected)) return null;
   
   try {
     const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf-8'));
